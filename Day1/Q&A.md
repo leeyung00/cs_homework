@@ -2,8 +2,7 @@
 A. 100%라고 생각한다. 두 개의 프로세스 모두 입출력 없이 cpu만 사용하기 때문이다.   
 
 ``` 
-### R. 
-./process-run.py -l 5:100,5:100 -c
+R. lee@lee:~/Desktop/ostep_homework$ ./process-run.py -l 5:100,5:100 -c
 Time        PID: 0        PID: 1           CPU           IOs
   1        RUN:cpu         READY             1          
   2        RUN:cpu         READY             1          
