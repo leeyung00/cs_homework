@@ -41,7 +41,7 @@ Time        PID: 0        PID: 1           CPU           IOs
 
 A. 순서를 교환하는 것은 중요하다. 왜냐하면 IO가 작동하는 동안 놀고 있던 cpu가 작동하여 기존 작업을 더 빠르게 끝내기 때문이다.
 
-'''
+```
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -l 1:0,4:100 -c
 Time        PID: 0        PID: 1           CPU           IOs
   1         RUN:io         READY             1          
@@ -51,13 +51,13 @@ Time        PID: 0        PID: 1           CPU           IOs
   5        BLOCKED       RUN:cpu             1             1
   6        BLOCKED          DONE                           1
   7*   RUN:io_done          DONE             1 
-  ''''
+```
 
 ### 4. 중요한 플래그 중 하나는 -S로서 프로세스가 입출력을 요청했을 때 시스템이 어떻게 반응하는지를 결정한다.이 플래그가SWITCH_ON_END로 지정되면 시스템은 요청 프로세스가 입출력을 하는 동안 다른프로세스로 전환하지 않고 대신 요청 프로세스가 종료될 때까지 기다린다.입출력만수행하는 프로세스와 CPU 작만 하는 프로세스 두 발를 실행시키면 어떤 결과가 발생하는가?(-l 1:0,4:200 -c -S SWITCH_ON_END)
 
 A. 교환이 되지 않기 때문에 2번 상황과 같이 cpu가 노는 시간이 발생하여 오랜 시간이 걸린다.
 
-'''
+```
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -l 1:0,4:200 -c -S SWITCH_ON_END
 Time        PID: 0        PID: 1           CPU           IOs
   1         RUN:io         READY             1          
@@ -71,7 +71,7 @@ Time        PID: 0        PID: 1           CPU           IOs
   9           DONE       RUN:cpu             1          
  10           DONE       RUN:cpu             1          
  11           DONE       RUN:cpu             1  
-'''
+```
 
 ### 5. 이번에는 프로세스가 입출력을 기다릴 때마다 다른 프로세스로 전환하도록 플래그를 지정하여 같은 프로세스를실행시켜보자(-l 1:0,4:100 -c -S SWITCH_ON_IO). 이제 어떤 결과가 생하는가?-c를 사용하여 예측이 맞는지 확인하시오
 
@@ -172,7 +172,7 @@ Stats: IO Busy  15 (71.43%)
 A. -I IO_RUN_IMMEDIATE -S SWITCH_ON_IO인 경우가 가장 효율적일 것이다. IO가 실행되는 동안에는 cpu를 사용할 수 있기 때문에 IO가 필요한 순간 빠르게 IO작업을 위해 cpu 1을 할당하고 남는 시간에 cpu를 돌리면 가장 효율적으로 관리할 수 있기 때문이다.
 
 ```
-i) -I IO_RUN_IMMEDIATE -S SWITCH_ON_END일 경우
+**i) -I IO_RUN_IMMEDIATE -S SWITCH_ON_END일 경우**
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -s 1 -l 3:50,3:50 -I IO_RUN_IMMEDIATE -S SWITCH_ON_END -c -p
 Time        PID: 0        PID: 1           CPU           IOs
   1        RUN:cpu         READY             1          
