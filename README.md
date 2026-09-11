@@ -9,5 +9,5 @@
 ## 3. 컨테이너
 [컨테이너 보안](https://product.kyobobook.co.kr/detail/S000001810356)
 
-## 2. 스크립트
+## 4. 스크립트
 [처음 배우는 셸 스크립트](https://product.kyobobook.co.kr/detail/S000001810353)
