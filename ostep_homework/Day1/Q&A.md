@@ -77,7 +77,7 @@ Time        PID: 0        PID: 1           CPU           IOs
 
 A. 문맥 교환이 발생하여 cpu가 노는 시간 없이 작업을 완료해 빠른 시간에 종료되었다.
 
-'''
+```
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -l 1:0,4:200 -c -S SWITCH_ON_IO
 Time        PID: 0        PID: 1           CPU           IOs
   1         RUN:io         READY             1          
@@ -87,13 +87,13 @@ Time        PID: 0        PID: 1           CPU           IOs
   5        BLOCKED       RUN:cpu             1             1
   6        BLOCKED          DONE                           1
   7*   RUN:io_done          DONE             1 
-'''
+```
 
 ### 6. 또 다른 중요한 행동은 입출력이 완료되을때무을하느냐이다.-I IO_RUN_LATER가 지정되면 입출력이 완료되을 때 입출력을 요청한 프로세스가 로 실행될 필요가다.완료 시점에 실행 중이던 프로세스가 계속 실행된다.다음과 같은 조합의 프로세스를 실행시키면 무슨 결과가 나오는가?(./process-run.py -l 3:0,5:100,5:100,5:100 -S SWITCH_ON_IO -I IO_RUN_LATER -c -p)시스템 자원은 효과적으로 활용되는
 
 A. IO작업이 되는 동안 cpu를 활용하여 17까지는 적절해 보였지만 이루 IO작업으로 인해 시간이 비효율적으로 소모된다.
 
-'''
+```
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -l 3:0,5:100,5:100,5:100 -S SWITCH_ON_IO -I IO_RUN_LATER -c -p
 Time        PID: 0        PID: 1        PID: 2        PID: 3           CPU           IOs
   1         RUN:io         READY         READY         READY             1          
@@ -131,13 +131,13 @@ Time        PID: 0        PID: 1        PID: 2        PID: 3           CPU      
 Stats: Total Time 31
 Stats: CPU Busy 21 (67.74%)
 Stats: IO Busy  15 (48.39%)
-'''
+```
 
 ### 7. 같은 프로세스 조합을 실행시킬 때 -I IO_RUN_IMMEDIATE를 지정하고 실행시키시오.이 플래그는 입출력이 완료되을 때 요청 프로세스가 곧로 실행되는 동작을 의미한다.이 동작은 어떤 결과를 만들어 내는가?방금 입출력을 완료한 프로세스를 다시 실행시키는 것이 좋은 생각일 수 있는 이유는 무인가?
 
 A. IO 작업을 하는 와중에 CPU는 노는 시간이 발생한다 그렇기에 이 시간에 다른 작업을 한다면 시간을 더욱 효율적으로 사용 가능하기 때문이다.
 
-'''
+```
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -l 3:0,5:100,5:100,5:100 -S SWITCH_ON_IO -I IO_RUN_IMMEDIATE -c -p
 Time        PID: 0        PID: 1        PID: 2        PID: 3           CPU           IOs
   1         RUN:io         READY         READY         READY             1          
@@ -165,13 +165,13 @@ Time        PID: 0        PID: 1        PID: 2        PID: 3           CPU      
 Stats: Total Time 21
 Stats: CPU Busy 21 (100.00%)
 Stats: IO Busy  15 (71.43%)
-'''
+```
 
 ### 8. 이제 다음과 같이 무작위로 생성된 프로세스를 실행시켜 보자.예를 들면,-s 1 -l 3:50,3:50,-s 2 -l 3:50,3:50,-s 3 -l 3:50,3:50.어떤 양상을 보일지 예측할 수 있는지 생각해 보시오.-I IO_RUN_IMMEDIATE를 지정했을 때와 -I IO_RUN_LATER를 지정했을 때 어떤 결과가 나오는가?-S SWITCH_ON_IO 대 -S SWITCH_ON_END의 경우에는 어떤 결과가 나오는가
 
 A. -I IO_RUN_IMMEDIATE -S SWITCH_ON_IO인 경우가 가장 효율적일 것이다. IO가 실행되는 동안에는 cpu를 사용할 수 있기 때문에 IO가 필요한 순간 빠르게 IO작업을 위해 cpu 1을 할당하고 남는 시간에 cpu를 돌리면 가장 효율적으로 관리할 수 있기 때문이다.
 
-'''
+```
 i) -I IO_RUN_IMMEDIATE -S SWITCH_ON_END일 경우
 lee@lee:~/Desktop/cs_homework/ostep_homework/Day1$ ./process-run.py -s 1 -l 3:50,3:50 -I IO_RUN_IMMEDIATE -S SWITCH_ON_END -c -p
 Time        PID: 0        PID: 1           CPU           IOs
@@ -500,4 +500,4 @@ Time        PID: 0        PID: 1           CPU           IOs
 Stats: Total Time 18
 Stats: CPU Busy 9 (50.00%)
 Stats: IO Busy  11 (61.11%)
-'''
+```
