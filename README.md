@@ -6,7 +6,7 @@
 ## 2. 네트워크
 [컴퓨터 네트워킹 하향식 접근](https://product.kyobobook.co.kr/detail/S000061694627)
 
-## 3. 컨테이너
+## 3. 컨테이너 / VM
 [컨테이너 보안](https://product.kyobobook.co.kr/detail/S000001810356)
 
 ## 4. 스크립트
