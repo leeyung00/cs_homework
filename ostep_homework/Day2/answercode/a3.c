@@ -6,7 +6,10 @@
 int
 main(int argc, char *argv[])
 {
+    bool* wait_for_child = malloc(sizeof(bool));
+    *wait_for_child = true;
     int rc = fork();
+    
     if (rc<0)
     {
         printf("fork failed\n");
@@ -14,11 +17,17 @@ main(int argc, char *argv[])
     }else if (rc==0)
     {
         printf("hello (pid:%d)\n", (int) getpid());
+        *wait_for_child = false;
     }
     else
     {
-        int wc = wait(NULL);
+        
+        while (*wait_for_child)
+        {
+            printf("waiting for child ");
+        }
         printf("goodbye (pid:%d)\n", (int) getpid());
     }
+    free(wait_for_child);
     return 0;
 }
